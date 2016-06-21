@@ -86,10 +86,10 @@ public class MainActivity extends AppCompatActivity {
             Fragment fragment = null;
             switch (position) {
                 case 0:
-                    fragment = NettyFragment.newInstance("");
+                    fragment = NettyFragment.Companion.newInstance("");
                     break;
                 case 1:
-                    fragment = NettyLogFragment.newInstance("");
+                    fragment = NettyLogFragment.Companion.newInstance("");
                     break;
             }
             return fragment;
