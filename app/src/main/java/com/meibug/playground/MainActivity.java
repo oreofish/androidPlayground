@@ -1,4 +1,4 @@
-package com.meibug.playground.androidplayground;
+package com.meibug.playground;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;

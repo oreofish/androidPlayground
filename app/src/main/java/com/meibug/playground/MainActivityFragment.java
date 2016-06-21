@@ -1,4 +1,4 @@
-package com.meibug.playground.androidplayground;
+package com.meibug.playground;
 
 import android.support.v4.app.Fragment;
 import android.os.Bundle;

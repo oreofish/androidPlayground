@@ -1,4 +1,4 @@
-package com.meibug.playground.androidplayground;
+package com.meibug.playground;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
