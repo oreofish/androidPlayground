@@ -13,17 +13,21 @@ android {
         versionCode 1
         versionName "1.0"
 
+        multiDexEnabled true
+
         testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
     }
 
     buildTypes {
+/*
         debug {
-            minifyEnabled true
+            minifyEnabled false
             // Uses new built-in shrinker http://tools.android.com/tech-docs/new-build-system/built-in-shrinker
             // useProguard false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             testProguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguardTest-rules.pro'
         }
+*/
 
         release {
             minifyEnabled true
@@ -38,9 +42,13 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    
+    // compile fileTree(dir: 'libs', include: ['*.jar'])
+    // compile files("libs/netty-common-4.1.1.Final.jar")
+    // compile files("libs/netty-buffer-4.1.1.Final.jar")
+    // compile files("libs/netty-codec-4.1.1.Final.jar")
+    // compile files("libs/netty-transport-4.1.1.Final.jar")
 
+    compile 'io.netty:netty-all:4.1.1.Final'
     // App's dependencies, including test
     compile "com.android.support:appcompat-v7:$rootProject.ext.supportLibraryVersion"
     compile "com.android.support:cardview-v7:$rootProject.ext.supportLibraryVersion"
