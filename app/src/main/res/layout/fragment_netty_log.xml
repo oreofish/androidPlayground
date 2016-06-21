@@ -6,8 +6,14 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".netty.NettyFragment"
-    tools:showIn="@layout/activity_main">
+    tools:context=".netty.NettyFragment">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/tvLog"
+        android:layout_gravity="center_horizontal|bottom"
+        android:background="#dddddd"
+        android:gravity="bottom" />
 
 </RelativeLayout>

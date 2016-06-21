@@ -7,20 +7,27 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.meibug.playground.R
+import kotlinx.android.synthetic.main.fragment_netty.*
+import kotlinx.android.synthetic.main.fragment_netty.view.*
 
 /**
  * A placeholder fragment containing a simple view.
  */
-class NettyFragment : Fragment() {
+class NettyFragment : Fragment(), NettyContract.ActionView {
+    override lateinit var presenter: NettyContract.Presenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // String title = getArguments().getString(ARG_TITLE);
+        NettyPresenter.actionView = this
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        return inflater!!.inflate(R.layout.fragment_netty, container, false)
+    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        val view = inflater!!.inflate(R.layout.fragment_netty, container, false)
+        view.btSearch.setOnClickListener({
+            presenter.search()
+        })
+        return view
     }
 
     companion object {

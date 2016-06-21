@@ -7,20 +7,27 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.meibug.playground.R
+import kotlinx.android.synthetic.main.fragment_netty_log.*
 
 /**
  * A placeholder fragment containing a simple view.
  */
-class NettyLogFragment : Fragment() {
+class NettyLogFragment : Fragment(), NettyContract.LogView {
+    override lateinit var presenter: NettyContract.Presenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // String title = getArguments().getString(ARG_TITLE);
+        NettyPresenter.logView = this
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        return inflater!!.inflate(R.layout.fragment_netty_log, container, false)
+    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        val view = inflater!!.inflate(R.layout.fragment_netty_log, container, false)
+        return view
+    }
+
+    override fun appendLog(log: String) {
+        tvLog.append("\n${log}")
     }
 
     companion object {

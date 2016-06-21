@@ -4,6 +4,7 @@ buildscript {
     // Define versions in a single place
     ext {
         kotlinVersion = '1.0.2-1'
+        ankoVersion = '0.8.2'
 
         // Sdk and tools
         minSdkVersion = 17
