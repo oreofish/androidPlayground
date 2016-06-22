@@ -16,7 +16,6 @@ object NettyPresenter: NettyContract.Presenter {
             field = value
             value?.presenter = this
         }
-    val discovery: LogEventBroadcaster = LogEventBroadcaster(InetSocketAddress("255.255.255.255", 8888))
 
     override fun start() {
         // do nothing
@@ -24,6 +23,10 @@ object NettyPresenter: NettyContract.Presenter {
 
     override fun search() {
         logView?.appendLog("Search")
-        discovery.search()
+        Thread(Runnable {
+            // val discovery: LogEventBroadcaster = LogEventBroadcaster(InetSocketAddress("255.255.255.255", 8888))
+            // discovery.search()
+            EchoServer.main(8888)
+        }).start()
     }
 }

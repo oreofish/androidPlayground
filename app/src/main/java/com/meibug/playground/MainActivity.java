@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.meibug.playground.netty.EchoServer;
 import com.meibug.playground.netty.NettyFragment;
 import com.meibug.playground.netty.NettyLogFragment;
 
@@ -61,6 +62,11 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            try {
+                EchoServer.main(8888);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             return true;
         }
 
