@@ -56,7 +56,6 @@ dependencies {
     compile "com.android.support:recyclerview-v7:$rootProject.ext.supportLibraryVersion"
     compile "com.android.support:support-v4:$rootProject.ext.supportLibraryVersion"
     compile "com.android.support.test.espresso:espresso-idling-resource:$rootProject.ext.espressoVersion"
-    compile "com.google.guava:guava:$rootProject.ext.guavaVersion"
 
     // Dependencies for local unit tests
     testCompile "junit:junit:$rootProject.ext.junitVersion"
