@@ -24,9 +24,14 @@ class NettyFragment : Fragment(), NettyContract.ActionView {
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val view = inflater!!.inflate(R.layout.fragment_netty, container, false)
+
         view.btReceive.setOnClickListener({
-            presenter.search(Integer.parseInt(etPort.text.toString()))
+            presenter.receive(Integer.parseInt(etPort.text.toString()))
             view.btReceive.text = "Receiving..."
+        })
+
+        view.btEcho.setOnClickListener({
+            presenter.echo()
         })
         return view
     }

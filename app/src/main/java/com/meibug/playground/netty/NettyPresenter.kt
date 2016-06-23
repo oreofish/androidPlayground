@@ -1,5 +1,6 @@
 package com.meibug.playground.netty
 
+import android.util.Log
 import java.net.InetSocketAddress
 
 /**
@@ -21,7 +22,13 @@ object NettyPresenter: NettyContract.Presenter {
         // do nothing
     }
 
-    override fun search(port: Int) {
+    override fun echo() {
+        Log.d("NettyPresenter", "start echo")
+        Thread(EchoServer(1234)).start()
+        Thread(EchoClient("localhost", 1234)).start()
+    }
+
+    override fun receive(port: Int) {
         logView?.appendLog("Search")
         Thread(Runnable {
             LogEventMonitor.main(port)

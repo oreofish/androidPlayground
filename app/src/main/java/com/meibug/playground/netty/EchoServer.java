@@ -1,5 +1,7 @@
 package com.meibug.playground.netty;
 
+import android.util.Log;
+
 import java.net.InetSocketAddress;
 
 import io.netty.bootstrap.ServerBootstrap;
@@ -18,9 +20,6 @@ public class EchoServer implements Runnable{
 
     public EchoServer(int port) {
         this.port = port;
-    }
-    public static void main(int port) throws Exception {
-        new Thread(new EchoServer(port)).start();                //2
     }
 
     @Override
@@ -41,7 +40,7 @@ public class EchoServer implements Runnable{
                     });
 
             ChannelFuture f = b.bind().sync();            //8
-            System.out.println(EchoServer.class.getName() + " started and listen on " + f.channel().localAddress());
+            Log.d("EchoServer", EchoServer.class.getName() + " started and listen on " + f.channel().localAddress());
             f.channel().closeFuture().sync();            //9
         } catch (Exception e) {
             e.printStackTrace();
