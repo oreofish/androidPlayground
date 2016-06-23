@@ -62,11 +62,6 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            try {
-                EchoServer.main(8888);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
             return true;
         }
 

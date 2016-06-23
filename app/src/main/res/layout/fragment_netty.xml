@@ -57,20 +57,21 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="IP"
+                    android:text="Broadcase Port"
                     android:id="@+id/textView" />
 
                 <EditText
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/editText"
-                    android:layout_weight="1" />
+                    android:id="@+id/etPort"
+                    android:layout_weight="1"
+                    android:inputType="number" />
 
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Pending"
-                    android:id="@+id/button" />
+                    android:text="Receive"
+                    android:id="@+id/btReceive" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

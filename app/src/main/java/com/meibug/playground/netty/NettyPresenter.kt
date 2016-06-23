@@ -21,12 +21,18 @@ object NettyPresenter: NettyContract.Presenter {
         // do nothing
     }
 
-    override fun search() {
+    override fun search(port: Int) {
         logView?.appendLog("Search")
         Thread(Runnable {
-            // val discovery: LogEventBroadcaster = LogEventBroadcaster(InetSocketAddress("255.255.255.255", 8888))
-            // discovery.search()
-            EchoServer.main(8888)
+            LogEventMonitor.main(port)
+/*
+            try {
+                EchoServer.main(8888)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+*/
+
         }).start()
     }
 }

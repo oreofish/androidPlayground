@@ -15,6 +15,6 @@ interface NettyContract {
     }
 
     interface Presenter: BasePresenter {
-        fun search()
+        fun search(port: Int)
     }
 }

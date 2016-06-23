@@ -34,7 +34,7 @@ public class LogEventBroadcaster {
     }
 
     public void search() {
-        ch.writeAndFlush(new LogEvent(null, -1, "file", "msg"));
+        ch.writeAndFlush(new LogEvent(null, -1, "file"));
     }
 
     public void stop() {

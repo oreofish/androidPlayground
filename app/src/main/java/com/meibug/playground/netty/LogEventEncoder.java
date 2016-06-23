@@ -21,11 +21,8 @@ public class LogEventEncoder extends MessageToMessageEncoder<LogEvent> {
 
     @Override
     protected void encode(ChannelHandlerContext channelHandlerContext, LogEvent logEvent, List<Object> out) throws Exception {
-        byte[] file = logEvent.getLogfile().getBytes(CharsetUtil.UTF_8); //2
-        byte[] msg = logEvent.getMsg().getBytes(CharsetUtil.UTF_8);
-        ByteBuf buf = channelHandlerContext.alloc().buffer(file.length + msg.length + 1);
-        buf.writeBytes(file);
-        buf.writeByte(LogEvent.SEPARATOR); //3
+        byte[] msg = logEvent.getMsg().get(0).getBytes();
+        ByteBuf buf = channelHandlerContext.alloc().buffer(msg.length + 1);
         buf.writeBytes(msg);  //4
         out.add(new DatagramPacket(buf, remoteAddress));  //5
     }
