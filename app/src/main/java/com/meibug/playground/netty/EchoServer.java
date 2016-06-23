@@ -17,6 +17,7 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 public class EchoServer implements Runnable{
 
     private final int port;
+    private static NioEventLoopGroup group = new NioEventLoopGroup(1);
 
     public EchoServer(int port) {
         this.port = port;
@@ -24,7 +25,6 @@ public class EchoServer implements Runnable{
 
     @Override
     public void run() {
-        NioEventLoopGroup group = new NioEventLoopGroup(); //3
         try {
             ServerBootstrap b = new ServerBootstrap();
             b.group(group)                                //4
@@ -40,16 +40,16 @@ public class EchoServer implements Runnable{
                     });
 
             ChannelFuture f = b.bind().sync();            //8
-            Log.d("EchoServer", EchoServer.class.getName() + " started and listen on " + f.channel().localAddress());
-            f.channel().closeFuture().sync();            //9
+            Log.w("EchoServer " + Thread.currentThread().getId(), EchoServer.class.getName() + " started and listen on " + f.channel().localAddress());
+            // f.channel().closeFuture().sync();            //9
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            try {
+/*            try {
                 group.shutdownGracefully().sync();            //10
             } catch (InterruptedException e) {
                 e.printStackTrace();
-            }
+            }*/
         }
     }
 

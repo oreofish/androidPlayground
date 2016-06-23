@@ -17,15 +17,25 @@ object NettyPresenter: NettyContract.Presenter {
             field = value
             value?.presenter = this
         }
+    // lateinit var server: EchoServer
+    lateinit var client: EchoClient
 
     override fun start() {
         // do nothing
     }
 
+    override fun setup() {
+        Log.d("NettyPresenter", "start setup")
+
+        EchoServer(1234).run()
+        EchoServer(1235).run()
+        EchoServer(1236).run()
+        Thread(EchoClient("localhost", 1234)).start()
+        Thread(EchoClient("localhost", 1235)).start()
+    }
+
     override fun echo() {
         Log.d("NettyPresenter", "start echo")
-        Thread(EchoServer(1234)).start()
-        Thread(EchoClient("localhost", 1234)).start()
     }
 
     override fun receive(port: Int) {

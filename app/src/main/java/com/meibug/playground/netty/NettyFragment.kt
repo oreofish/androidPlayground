@@ -30,6 +30,10 @@ class NettyFragment : Fragment(), NettyContract.ActionView {
             view.btReceive.text = "Receiving..."
         })
 
+        view.btSetup.setOnClickListener({
+            presenter.setup()
+        })
+
         view.btEcho.setOnClickListener({
             presenter.echo()
         })

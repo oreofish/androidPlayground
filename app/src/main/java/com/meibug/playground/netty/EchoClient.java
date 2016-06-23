@@ -17,6 +17,7 @@ public class EchoClient implements Runnable {
 
     private final String host;
     private final int port;
+    private static NioEventLoopGroup group = new NioEventLoopGroup(1);
 
     public EchoClient(String host, int port) {
         this.host = host;
@@ -25,7 +26,6 @@ public class EchoClient implements Runnable {
 
     @Override
     public void run() {
-        EventLoopGroup group = new NioEventLoopGroup();
         try {
             Bootstrap b = new Bootstrap();                //1
             b.group(group)                                //2
@@ -40,15 +40,15 @@ public class EchoClient implements Runnable {
 
             ChannelFuture f = b.connect().sync();        //6
 
-            f.channel().closeFuture().sync();            //7
+            // f.channel().closeFuture().sync();            //7
         } catch (Exception e){
             e.printStackTrace();
         } finally {
-            try {
+/*            try {
                 group.shutdownGracefully().sync();            //8
             } catch (InterruptedException e) {
                 e.printStackTrace();
-            }
+            }*/
         }
     }
 }

@@ -15,6 +15,7 @@ interface NettyContract {
     }
 
     interface Presenter: BasePresenter {
+        fun setup()
         fun echo()
         fun receive(port: Int)
     }
