@@ -88,6 +88,13 @@ dependencies {
 
     // JSON
     compile "com.google.code.gson:gson:2.4"
+
+    // Reactive library
+    compile "io.reactivex:rxkotlin:$rxkotlinVersion"
+    compile "io.reactivex:rxandroid:$rxandroidVersion"
+    compile "com.trello:rxlifecycle:$rxLifecycleVersion"
+    compile "com.trello:rxlifecycle-components:$rxLifecycleVersion"
+    compile "com.trello:rxlifecycle-kotlin:$rxLifecycleVersion"
 }
 
 repositories {

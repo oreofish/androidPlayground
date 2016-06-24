@@ -4,7 +4,10 @@ buildscript {
     // Define versions in a single place
     ext {
         kotlinVersion = '1.0.2-1'
-        ankoVersion = '0.8.2'
+        ankoVersion = '0.8.3'
+        rxkotlinVersion = '0.55.0'
+        rxandroidVersion = '1.2.1'
+        rxLifecycleVersion = '0.6.1'
 
         // Sdk and tools
         minSdkVersion = 17

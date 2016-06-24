@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.meibug.playground.R
+import com.meibug.playground.events.ClientGetEvent
+import com.meibug.playground.rx.RxBus
 import kotlinx.android.synthetic.main.fragment_netty_log.*
 
 /**
@@ -23,6 +25,11 @@ class NettyLogFragment : Fragment(), NettyContract.LogView {
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val view = inflater!!.inflate(R.layout.fragment_netty_log, container, false)
+        RxBus.toObserverable().subscribe {
+            if (it is ClientGetEvent) {
+                appendLog(it.msg)
+            }
+        }
         return view
     }
 

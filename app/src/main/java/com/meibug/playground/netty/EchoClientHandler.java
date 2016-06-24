@@ -2,6 +2,9 @@ package com.meibug.playground.netty;
 
 import android.util.Log;
 
+import com.meibug.playground.events.ClientGetEvent;
+import com.meibug.playground.rx.RxBus;
+
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandler;
@@ -29,6 +32,7 @@ public class EchoClientHandler extends SimpleChannelInboundHandler<ByteBuf> {
     @Override
     public void channelRead0(ChannelHandlerContext ctx, ByteBuf in) {
         Log.w("EchoClientHandler " + Thread.currentThread().getId(), "Client received: " + in.toString(CharsetUtil.UTF_8));    //3
+        RxBus.INSTANCE.send(new ClientGetEvent(in.toString(CharsetUtil.UTF_8)));
     }
 
     @Override
