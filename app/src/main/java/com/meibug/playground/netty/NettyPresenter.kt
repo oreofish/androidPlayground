@@ -1,6 +1,8 @@
 package com.meibug.playground.netty
 
 import android.util.Log
+import com.meibug.playground.events.ClientGetEvent
+import com.meibug.playground.rx.RxBus
 import java.net.InetSocketAddress
 
 /**
@@ -20,8 +22,8 @@ object NettyPresenter: NettyContract.Presenter {
     // lateinit var server: EchoServer
     lateinit var client: EchoClient
 
+    // init
     override fun start() {
-        // do nothing
     }
 
     override fun setup() {
@@ -39,9 +41,9 @@ object NettyPresenter: NettyContract.Presenter {
     }
 
     override fun receive(port: Int) {
-        logView?.appendLog("Search")
+        logView?.appendLog("Start receiving...")
         Thread(Runnable {
-            LogEventMonitor.main(port)
+            LogEventMonitor.start(port)
 /*
             try {
                 EchoServer.main(8888)

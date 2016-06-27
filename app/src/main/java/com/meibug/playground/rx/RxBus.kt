@@ -16,3 +16,12 @@ object RxBus {
         return bus
     }
 }
+
+private fun <T> Observable<Any>.filterByType(classType: Class<T>): Observable<T> {
+    return this.filter {
+        if (!classType.isInstance(it)) {
+            return@filter false
+        }
+        true
+    } as Observable<T>
+}

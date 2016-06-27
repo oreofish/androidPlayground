@@ -2,6 +2,8 @@ package com.meibug.playground.netty;
 
 import android.util.Log;
 
+import com.meibug.playground.rx.RxBus;
+
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 
@@ -18,6 +20,7 @@ public class LogEventHandler extends SimpleChannelInboundHandler<LogEvent> { //1
 
     @Override
     public void channelRead0(ChannelHandlerContext channelHandlerContext, LogEvent event) throws Exception {
+        RxBus.INSTANCE.send(event);
         Log.d("LogEventHandler", event.getMsg().get(0));
     }
 }

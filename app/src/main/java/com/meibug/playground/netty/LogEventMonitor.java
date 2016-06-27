@@ -51,7 +51,7 @@ public class LogEventMonitor {
         multicastLock.release();
     }
 
-    public static void main(int port) throws Exception {
+    public static void start(int port) throws Exception {
         LogEventMonitor monitor = new LogEventMonitor(new InetSocketAddress(port));  //4
         try {
             Channel channel = monitor.bind();
