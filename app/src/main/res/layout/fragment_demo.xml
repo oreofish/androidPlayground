@@ -6,12 +6,21 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.meibug.playground.MainActivityFragment"
-    tools:showIn="@layout/activity_main">
+    tools:context=".demo.DemoFragment">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:text="Hello World!"
+        android:id="@+id/tvMsg" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hi"
+        android:id="@+id/btHi"
+        android:layout_below="@+id/tvMsg"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="37dp" />
 
 </RelativeLayout>
