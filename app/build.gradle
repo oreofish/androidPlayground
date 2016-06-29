@@ -61,6 +61,7 @@ dependencies {
     // Log
     compile 'org.jetbrains:annotations:13.0'
     compile 'com.jakewharton.timber:timber:4.1.2'
+    compile 'com.orhanobut:logger:1.15'
 
     // Dependencies for local unit tests
     testCompile "junit:junit:$rootProject.ext.junitVersion"

@@ -6,21 +6,52 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".demo.LogFragment">
+    tools:context=".log.LogFragment">
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:text="Hello World!"
-        android:id="@+id/tvMsg" />
+        android:id="@+id/tvMsg"
+        android:layout_above="@+id/linearLayout" />
 
-    <Button
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hi"
-        android:id="@+id/btHi"
-        android:layout_below="@+id/tvMsg"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="37dp" />
+        android:layout_alignParentStart="false"
+        android:weightSum="4"
+        android:layout_alignParentEnd="false"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/linearLayout">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Timber"
+            android:id="@+id/btTimber"
+            android:layout_weight="1" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Logger"
+            android:id="@+id/btLogger"
+            android:layout_weight="1" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="AnLog"
+            android:id="@+id/btAnLog"
+            android:layout_weight="1" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Test"
+            android:id="@+id/btTest"
+            android:layout_weight="1" />
+    </LinearLayout>
 
 </RelativeLayout>

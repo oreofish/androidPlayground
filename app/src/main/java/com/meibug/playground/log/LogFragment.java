@@ -9,14 +9,20 @@ import android.widget.TextView;
 
 import com.meibug.playground.BaseFragment;
 import com.meibug.playground.R;
+import com.orhanobut.logger.Logger;
+
+import timber.log.Timber;
 
 /**
  * A placeholder fragment containing a simple view.
  */
-public class LogFragment extends BaseFragment implements LogContract.View {
+public class LogFragment extends BaseFragment implements LogContract.View, View.OnClickListener {
     private LogContract.Presenter presenter;
     private TextView tvMsg;
-    private Button btHi;
+    private Button btTimber;
+    private Button btLogger;
+    private Button btAnLog;
+    private Button btTest;
 
     public static LogFragment newInstance() {
         Bundle args = new Bundle();
@@ -29,28 +35,58 @@ public class LogFragment extends BaseFragment implements LogContract.View {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         new LogPresenter(this);
+
         View view = inflater.inflate(R.layout.fragment_log, container, false);
         tvMsg = (TextView) view.findViewById(R.id.tvMsg);
-        btHi = (Button) view.findViewById(R.id.btHi);
-        btHi.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                presenter.sayHi();
-            }
-        });
+        btTimber = (Button) view.findViewById(R.id.btTimber);
+        btTimber.setOnClickListener(this);
+        btLogger = (Button) view.findViewById(R.id.btLogger);
+        btLogger.setOnClickListener(this);
+        btAnLog = (Button) view.findViewById(R.id.btAnLog);
+        btAnLog.setOnClickListener(this);
+        btTest = (Button) view.findViewById(R.id.btTest);
+        btTest.setOnClickListener(this);
+
         return view;
     }
 
     @Override
     public void setPresenter(LogContract.Presenter presenter) {
         this.presenter = presenter;
+        presenter.start();
     }
 
     @Override
-    public void showMsg(String msg) {
-        tvMsg.setText(msg);
+    public void clearMsg() {
+        tvMsg.setText("");
+    }
+
+    @Override
+    public void addMsg(String msg) {
+        tvMsg.append(msg + "\n");
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btTimber:
+                Timber.w("onClick btTimber");
+                presenter.doTimber();
+                Timber.e("done btTimber");
+                break;
+            case R.id.btLogger:
+                Logger.w("onClick btLogger");
+                presenter.doLogger();
+                Logger.e("done btLogger");
+                break;
+            case R.id.btAnLog:
+                presenter.doAnLog();
+                break;
+            case R.id.btTest:
+                presenter.doTest();
+                break;
+        }
     }
 }

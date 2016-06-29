@@ -14,11 +14,13 @@ class App : Application() {
         super.onCreate()
         instance = this
 
+/*
         if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree());
         } else {
             Timber.plant(CrashReportingTree());
         }
+*/
     }
 
     companion object {

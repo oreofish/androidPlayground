@@ -8,10 +8,14 @@ import com.meibug.playground.BaseView;
  */
 public interface LogContract {
     interface View extends BaseView<Presenter> {
-        void showMsg(String msg);
+        void clearMsg();
+        void addMsg(String msg);
     }
 
     interface Presenter extends BasePresenter {
-        void sayHi();
+        void doTimber();
+        void doLogger();
+        void doAnLog();
+        void doTest();
     }
 }
