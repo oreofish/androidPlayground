@@ -1,14 +1,14 @@
-package com.meibug.playground.demo;
+package com.meibug.playground.log;
 
 import com.meibug.playground.BaseFragment;
 
 /**
  * Created by xing on 16/6/29.
  */
-public class DemoPresenter implements DemoContract.Presenter {
-    private DemoContract.View view = null;
+public class LogPresenter implements LogContract.Presenter {
+    private LogContract.View view = null;
 
-    public DemoPresenter(DemoContract.View v) {
+    public LogPresenter(LogContract.View v) {
         view = v;
         view.setPresenter(this);
     }

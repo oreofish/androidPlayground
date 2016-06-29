@@ -14,7 +14,7 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.meibug.playground.demo.DemoFragment;
+import com.meibug.playground.log.LogFragment;
 
 import java.util.ArrayList;
 
@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         // add fragments
         ArrayList<BaseFragment> fragments = BaseFragment.Companion.getFragments();
         fragments.clear();
-        fragments.add(DemoFragment.newInstance());
+        fragments.add(LogFragment.newInstance());
 
         // init UI
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
