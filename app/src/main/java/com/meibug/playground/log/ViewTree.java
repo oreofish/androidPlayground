@@ -12,6 +12,6 @@ import timber.log.Timber;
 public class ViewTree extends Timber.Tree {
 
     @Override protected void log(int priority, String tag, String message, Throwable t) {
-        RxBus.INSTANCE.send(new LogEvent(priority, tag, message, t));
+        RxBus.INSTANCE.post(new LogEvent(priority, tag, message, t));
     }
 }

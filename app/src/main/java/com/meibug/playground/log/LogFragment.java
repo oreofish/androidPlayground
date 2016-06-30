@@ -61,12 +61,12 @@ public class LogFragment extends BaseFragment implements LogContract.View, View.
     }
 
     void initBus() {
-        RxBus.INSTANCE.toObserverable().subscribe(new Action1<Object>() {
+        RxBus.INSTANCE.toObserverable(LogEvent.class)
+                .compose(this.<LogEvent>bindToLifecycle())
+                .subscribe(new Action1<LogEvent>() {
             @Override
-            public void call(Object object) {
-                if (object instanceof LogEvent) {
-                    addMsg(((LogEvent)object).getMessage());
-                }
+            public void call(LogEvent event) {
+                addMsg(event.getMessage());
             }
         });
     }
