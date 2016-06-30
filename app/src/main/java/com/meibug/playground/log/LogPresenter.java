@@ -1,5 +1,8 @@
 package com.meibug.playground.log;
 
+import android.os.AsyncTask;
+import android.os.Handler;
+
 import com.meibug.playground.BaseFragment;
 import com.orhanobut.logger.LogLevel;
 import com.orhanobut.logger.Logger;
@@ -32,12 +35,14 @@ public class LogPresenter implements LogContract.Presenter {
                 "=============================================",
                 "aaaaa",
                 "aaaaa aaaaa",
-                "aaaaa aaaaa",
-                "aaaaa aaaaa",
-                "aaaaa aaaaa",
-                "aaaaa aaaaa",
+                "aaaaa",
                 "aaaaa aaaaa",
                 "aaaaa",
+                "aaaaa aaaaa",
+                "aaaaa",
+                "aaaaa aaaaa",
+                "aaaaa",
+                "aaaaa aaaaa",
                 "aaaaa",
                 "aaaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa",
                 "aaaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa",
@@ -50,11 +55,6 @@ public class LogPresenter implements LogContract.Presenter {
         };
         logstrs = Arrays.asList(logs);
 
-        // init Timber
-        Timber.uprootAll();
-        Timber.plant(new Timber.DebugTree());
-        Timber.plant(new ViewTree());
-
         // init Logger
         Logger.init()                 // default PRETTYLOGGER or use just init()
                 .methodCount(3)                 // default 2
@@ -66,11 +66,23 @@ public class LogPresenter implements LogContract.Presenter {
 
     @Override
     public void doTimber() {
+        // init Timber
+        Timber.uprootAll();
+        Timber.plant(new Timber.DebugTree());
+        Timber.plant(new ViewTree());
+
         view.clearMsg();
         Timber.i("start doTimber()");
         for (String log : logstrs) {
             Timber.d(log);
         }
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Timber.w("write log in thread");
+            }
+        }).start();
 
         try {
             nullString.substring(0);
@@ -89,6 +101,13 @@ public class LogPresenter implements LogContract.Presenter {
         for (String log : logstrs) {
             Logger.i(log);
         }
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Logger.w("write log in thread");
+            }
+        }).start();
 
         try {
             nullString.substring(0);
@@ -110,6 +129,41 @@ public class LogPresenter implements LogContract.Presenter {
     @Override
     public void doTest() {
         view.clearMsg();
-        view.addMsg("Pending");
+        view.addMsg("Testing...");
+        final int COUNT = 50; // logstrs size is 20
+
+        new Handler().post(new Runnable() {
+            @Override
+            public void run() {
+                // test Timber
+                Timber.uprootAll();
+                Timber.plant(new Timber.DebugTree());
+
+                Timber.i("start Timber test");
+                long startAt = System.currentTimeMillis();
+                for(int i = 0;i < COUNT; i++) {
+                    for (String log : logstrs) {
+                        Timber.d(log);
+                    }
+                }
+                long endAt = System.currentTimeMillis();
+                Timber.e("10000 Timber logs spend %d", endAt - startAt);
+                view.addMsg("Timber spends " + Long.toString(endAt - startAt) + "ms.");
+
+
+                // test Logger
+                Logger.i("start Logger test");
+                startAt = System.currentTimeMillis();
+                for(int i = 0;i < COUNT; i++) {
+                    for (String log : logstrs) {
+                        Logger.d(log);
+                    }
+                }
+                endAt = System.currentTimeMillis();
+                Logger.e("10000 Logger logs spend %d", endAt - startAt);
+                view.addMsg("Logger spends " + Long.toString(endAt - startAt) + "ms.");
+                view.addMsg("Test Done");
+            }
+        });
     }
 }
