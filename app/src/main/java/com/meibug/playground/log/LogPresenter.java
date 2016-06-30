@@ -27,6 +27,7 @@ public class LogPresenter implements LogContract.Presenter {
 
     @Override
     public void start() {
+        // prepare some sample logs
         String[] logs = new String[]{
                 "=============================================",
                 "aaaaa",
@@ -49,21 +50,25 @@ public class LogPresenter implements LogContract.Presenter {
         };
         logstrs = Arrays.asList(logs);
 
+        // init Timber
         Timber.uprootAll();
         Timber.plant(new Timber.DebugTree());
+        Timber.plant(new ViewTree());
+
+        // init Logger
         Logger.init()                 // default PRETTYLOGGER or use just init()
-              .methodCount(3)                 // default 2
-              // .hideThreadInfo()               // default shown
-              // .logLevel(LogLevel.NONE)        // default LogLevel.FULL
-              .methodOffset(2);                // default 0
-              // .logAdapter(new AndroidLogAdapter()); //default AndroidLogAdapter
+                .methodCount(3)                 // default 2
+                // .hideThreadInfo()               // default shown
+                // .logLevel(LogLevel.NONE)        // default LogLevel.FULL
+                .methodOffset(2);                // default 0
+        // .logAdapter(new AndroidLogAdapter()); //default AndroidLogAdapter
     }
 
     @Override
     public void doTimber() {
         view.clearMsg();
         Timber.i("start doTimber()");
-        for(String log : logstrs) {
+        for (String log : logstrs) {
             Timber.d(log);
         }
         Timber.i("end doTimber()");
@@ -79,10 +84,10 @@ public class LogPresenter implements LogContract.Presenter {
     public void doLogger() {
         view.clearMsg();
         Logger.i("start doLogger()");
-        for(String log : logstrs) {
+        for (String log : logstrs) {
             Logger.i(log);
         }
-        Logger.json(logstrs.get(logstrs.size()-1));
+        Logger.json(logstrs.get(logstrs.size() - 1));
         try {
             nullString.substring(0);
         } catch (Exception e) {

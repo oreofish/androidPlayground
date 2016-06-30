@@ -1,5 +1,7 @@
 package com.meibug.playground.log;
 
+import android.animation.ObjectAnimator;
+import android.content.res.ObbInfo;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,8 +11,10 @@ import android.widget.TextView;
 
 import com.meibug.playground.BaseFragment;
 import com.meibug.playground.R;
+import com.meibug.playground.rx.RxBus;
 import com.orhanobut.logger.Logger;
 
+import rx.functions.Action1;
 import timber.log.Timber;
 
 /**
@@ -49,7 +53,20 @@ public class LogFragment extends BaseFragment implements LogContract.View, View.
         btTest = (Button) view.findViewById(R.id.btTest);
         btTest.setOnClickListener(this);
 
+        initBus();
+
         return view;
+    }
+
+    void initBus() {
+        RxBus.INSTANCE.toObserverable().subscribe(new Action1<Object>() {
+            @Override
+            public void call(Object object) {
+                if (object instanceof LogEvent) {
+                    addMsg(((LogEvent)object).getMessage());
+                }
+            }
+        });
     }
 
     @Override
