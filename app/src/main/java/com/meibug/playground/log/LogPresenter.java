@@ -71,12 +71,14 @@ public class LogPresenter implements LogContract.Presenter {
         for (String log : logstrs) {
             Timber.d(log);
         }
-        Timber.i("end doTimber()");
+
         try {
             nullString.substring(0);
         } catch (Exception e) {
             Timber.e(e.fillInStackTrace(), "Null");
         }
+
+        Timber.i("end doTimber()");
         view.addMsg("Done");
     }
 
@@ -87,12 +89,14 @@ public class LogPresenter implements LogContract.Presenter {
         for (String log : logstrs) {
             Logger.i(log);
         }
-        Logger.json(logstrs.get(logstrs.size() - 1));
+
         try {
             nullString.substring(0);
         } catch (Exception e) {
             Logger.e(e.fillInStackTrace(), "Null");
         }
+        Logger.json(logstrs.get(logstrs.size() - 2));
+
         Logger.i("end doLogger()");
         view.addMsg("Done");
     }

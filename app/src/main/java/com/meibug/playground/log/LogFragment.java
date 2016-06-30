@@ -3,6 +3,7 @@ package com.meibug.playground.log;
 import android.animation.ObjectAnimator;
 import android.content.res.ObbInfo;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,6 +45,7 @@ public class LogFragment extends BaseFragment implements LogContract.View, View.
 
         View view = inflater.inflate(R.layout.fragment_log, container, false);
         tvMsg = (TextView) view.findViewById(R.id.tvMsg);
+        tvMsg.setMovementMethod(new ScrollingMovementMethod());
         btTimber = (Button) view.findViewById(R.id.btTimber);
         btTimber.setOnClickListener(this);
         btLogger = (Button) view.findViewById(R.id.btLogger);
@@ -82,7 +84,7 @@ public class LogFragment extends BaseFragment implements LogContract.View, View.
 
     @Override
     public void addMsg(String msg) {
-        tvMsg.append(msg + "\n");
+        tvMsg.append("\n" + msg);
     }
 
     @Override
