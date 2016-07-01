@@ -50,18 +50,16 @@ public class LogPresenter implements LogContract.Presenter {
                 "aaaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa",
                 "aaaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa",
                 "aaaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa",
-                "{\"one\":true,\"three\":[\"red\",\"yellow\",[\"blue\",\"azure\",\"cobalt\",\"teal\"],\"orange\"],\"two\":19.5}",
+                "{\"one\":true,\"three\":[\"red\",\"orange\"],\"two\":19.5}",
                 "=============================================",
         };
         logstrs = Arrays.asList(logs);
 
         // init Logger
         Logger.init()                 // default PRETTYLOGGER or use just init()
-                .methodCount(3)                 // default 2
                 // .hideThreadInfo()               // default shown
-                // .logLevel(LogLevel.NONE)        // default LogLevel.FULL
-                .methodOffset(2);                // default 0
-        // .logAdapter(new AndroidLogAdapter()); //default AndroidLogAdapter
+                .methodOffset(2)                // default 0
+                .singleMode();
     }
 
     @Override
@@ -113,8 +111,12 @@ public class LogPresenter implements LogContract.Presenter {
             nullString.substring(0);
         } catch (Exception e) {
             Logger.e(e.fillInStackTrace(), "Null");
+
         }
+        Logger.e(Logger.IAMHERE5);
         Logger.json(logstrs.get(logstrs.size() - 2));
+        Logger.e(Logger.IAMHERE4);
+
 
         Logger.i("end doLogger()");
         view.addMsg("Done");
