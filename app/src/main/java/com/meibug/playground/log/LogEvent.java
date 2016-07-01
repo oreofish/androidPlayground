@@ -16,15 +16,15 @@ public class LogEvent {
         this.t = t;
     }
 
-    String getTag() {
+    public String getTag() {
         return tag;
     }
 
-    int getPriority() {
+    public int getPriority() {
         return priority;
     }
 
-    String getMessage() {
+    public String getMessage() {
         if (t != null) {
             message = t.getMessage();
         }

@@ -80,7 +80,7 @@ public class LogPresenter implements LogContract.Presenter {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                // Timber.w("write log in thread");
+                Timber.w("write log in thread");
             }
         }).start();
 
