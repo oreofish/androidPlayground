@@ -3,6 +3,7 @@ package com.meibug.playground.log;
 import android.animation.ObjectAnimator;
 import android.content.res.ObbInfo;
 import android.os.Bundle;
+import android.os.Looper;
 import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,7 @@ import com.meibug.playground.R;
 import com.meibug.playground.rx.RxBus;
 import com.orhanobut.logger.Logger;
 
+import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import timber.log.Timber;
 
@@ -61,8 +63,11 @@ public class LogFragment extends BaseFragment implements LogContract.View, View.
     }
 
     void initBus() {
-        RxBus.INSTANCE.toObserverable(LogEvent.class)
+        RxBus.INSTANCE
+                .toObserverable(LogEvent.class)
                 .compose(this.<LogEvent>bindToLifecycle())
+                .onBackpressureBuffer()
+                .observeOn(AndroidSchedulers.from(Looper.myLooper()))
                 .subscribe(new Action1<LogEvent>() {
             @Override
             public void call(LogEvent event) {
