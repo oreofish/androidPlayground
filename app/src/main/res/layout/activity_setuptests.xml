@@ -67,6 +67,13 @@
                 android:layout_marginTop="16dp"
                 android:text="@string/test_otto" />
 
+            <CheckBox
+                android:id="@+id/checkBoxRxBus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:layout_marginTop="16dp"
+                android:text="@string/test_rxbus" />
 
             <CheckBox
                 android:id="@+id/checkBoxBroadcast"

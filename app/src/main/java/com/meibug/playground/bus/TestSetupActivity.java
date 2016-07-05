@@ -30,6 +30,7 @@ import com.meibug.playground.R;
 import org.greenrobot.eventbus.ThreadMode;
 import com.meibug.playground.bus.testsubject.PerfTestEventBus;
 import com.meibug.playground.bus.testsubject.PerfTestOtto;
+import com.meibug.playground.bus.testsubject.PerfTestRxBus;
 
 import java.util.ArrayList;
 
@@ -45,6 +46,11 @@ public class TestSetupActivity extends Activity {
             PerfTestOtto.RegisterOneByOne.class,//
             PerfTestOtto.RegisterAll.class, //
             PerfTestOtto.RegisterFirstTime.class};
+
+    static final Class[] TEST_CLASSES_RXBUS = {PerfTestRxBus.Post.class,//
+            PerfTestRxBus.RegisterOneByOne.class,//
+            PerfTestRxBus.RegisterAll.class, //
+            PerfTestRxBus.RegisterFirstTime.class};
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -106,6 +112,7 @@ public class TestSetupActivity extends Activity {
         // the attributes are putted in the intent (eventbus, otto, broadcast, local broadcast)
         final CheckBox checkBoxEventBus = (CheckBox) findViewById(R.id.checkBoxEventBus);
         final CheckBox checkBoxOtto = (CheckBox) findViewById(R.id.checkBoxOtto);
+        final CheckBox checkBoxRxBus = (CheckBox) findViewById(R.id.checkBoxRxBus);
         final CheckBox checkBoxBroadcast = (CheckBox) findViewById(R.id.checkBoxBroadcast);
         final CheckBox checkBoxLocalBroadcast = (CheckBox) findViewById(R.id.checkBoxLocalBroadcast);
         if (checkBoxEventBus.isChecked()) {
@@ -113,6 +120,9 @@ public class TestSetupActivity extends Activity {
         }
         if (checkBoxOtto.isChecked()) {
             testClasses.add(TEST_CLASSES_OTTO[testPos]);
+        }
+        if (checkBoxRxBus.isChecked()) {
+            testClasses.add(TEST_CLASSES_RXBUS[testPos]);
         }
         if (checkBoxBroadcast.isChecked()) {
         }

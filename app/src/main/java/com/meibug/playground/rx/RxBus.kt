@@ -8,20 +8,11 @@ import rx.subjects.Subject
 object RxBus {
     private val bus: Subject<Any, Any> = SerializedSubject(PublishSubject.create())
 
-    fun send(o: Any) {
+    fun post(o: Any) {
         bus.onNext(o)
     }
 
-    fun toObserverable(): Observable<Any> {
-        return bus
+    fun <T> toObserverable(eventType: Class<T>): Observable<T> {
+        return bus.ofType(eventType) // ofType = filter + cast
     }
-}
-
-private fun <T> Observable<Any>.filterByType(classType: Class<T>): Observable<T> {
-    return this.filter {
-        if (!classType.isInstance(it)) {
-            return@filter false
-        }
-        true
-    } as Observable<T>
 }

@@ -40,8 +40,7 @@
         </activity>
         <activity
             android:name="com.meibug.playground.bus.TestRunnerActivity"
-            android:label="@string/app_name"
-            android:process="de.greenrobot.eventperf.benchmark" >
+            android:label="@string/app_name" >
         </activity>
     </application>
 
