@@ -60,7 +60,7 @@ dependencies {
     compile "com.android.support.test.espresso:espresso-idling-resource:$rootProject.ext.espressoVersion"
 
     // Log
-    compile 'org.jetbrains:annotations:13.0'
+    // compile 'org.jetbrains:annotations:13.0'
     compile 'com.jakewharton.timber:timber:4.1.2'
 
     // Dependencies for local unit tests
