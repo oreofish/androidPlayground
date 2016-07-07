@@ -19,4 +19,32 @@ package com.meibug.playground.bus;
 /** Used by otto and EventBus */
 public class TestEvent {
 
+    public static TestEvent createEvent(int index) {
+        switch (index) {
+            case 0:
+                return new TestEvent0();
+            case 1:
+                return new TestEvent1();
+            case 2:
+                return new TestEvent2();
+            case 3:
+                return new TestEvent3();
+            case 4:
+                return new TestEvent4();
+            case 5:
+                return new TestEvent5();
+            case 6:
+                return new TestEvent6();
+            case 7:
+                return new TestEvent7();
+            case 8:
+                return new TestEvent8();
+            default:
+            case 9:
+                return new TestEvent9();
+        }
+    }
+
+
+
 }

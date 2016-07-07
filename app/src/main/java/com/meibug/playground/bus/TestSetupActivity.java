@@ -28,9 +28,11 @@ import android.widget.Spinner;
 import com.meibug.playground.R;
 
 import org.greenrobot.eventbus.ThreadMode;
+
 import com.meibug.playground.bus.testsubject.PerfTestEventBus;
 import com.meibug.playground.bus.testsubject.PerfTestOtto;
 import com.meibug.playground.bus.testsubject.PerfTestRxBus;
+import com.meibug.playground.bus.testsubject.PerfTestRxBusMulti;
 
 import java.util.ArrayList;
 
@@ -51,6 +53,11 @@ public class TestSetupActivity extends Activity {
             PerfTestRxBus.RegisterOneByOne.class,//
             PerfTestRxBus.RegisterAll.class, //
             PerfTestRxBus.RegisterFirstTime.class};
+
+    static final Class[] TEST_CLASSES_RXBUSMULTI = {PerfTestRxBusMulti.Post.class,//
+            PerfTestRxBusMulti.RegisterOneByOne.class,//
+            PerfTestRxBusMulti.RegisterAll.class, //
+            PerfTestRxBusMulti.RegisterFirstTime.class};
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -123,6 +130,9 @@ public class TestSetupActivity extends Activity {
         }
         if (checkBoxRxBus.isChecked()) {
             testClasses.add(TEST_CLASSES_RXBUS[testPos]);
+            testClasses.add(TEST_CLASSES_RXBUS[testPos]);
+            testClasses.add(TEST_CLASSES_RXBUSMULTI[testPos]);
+            testClasses.add(TEST_CLASSES_RXBUSMULTI[testPos]);
         }
         if (checkBoxBroadcast.isChecked()) {
         }

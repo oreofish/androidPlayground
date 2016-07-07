@@ -17,16 +17,22 @@
 package com.meibug.playground.bus.testsubject;
 
 import android.content.Context;
-import android.os.Looper;
 
-import com.meibug.playground.bus.MyEventBusIndex;
 import com.meibug.playground.bus.Test;
 import com.meibug.playground.bus.TestEvent;
 import com.meibug.playground.bus.TestEvent0;
+import com.meibug.playground.bus.TestEvent1;
+import com.meibug.playground.bus.TestEvent2;
+import com.meibug.playground.bus.TestEvent3;
+import com.meibug.playground.bus.TestEvent4;
+import com.meibug.playground.bus.TestEvent5;
+import com.meibug.playground.bus.TestEvent6;
+import com.meibug.playground.bus.TestEvent7;
+import com.meibug.playground.bus.TestEvent8;
+import com.meibug.playground.bus.TestEvent9;
 import com.meibug.playground.bus.TestParams;
 import com.meibug.playground.rx.RxBus;
 
-import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
@@ -34,22 +40,19 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 
-import rx.Observable;
-import rx.Scheduler;
 import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
-import rx.schedulers.Schedulers;
 
-public abstract class PerfTestRxBus extends Test {
+public abstract class PerfTestRxBusMulti extends Test {
 
     private final ArrayList<Object> subscribers;
     private final ArrayList<Subscription> eventSubscribers;
     private final Class<?> subscriberClass;
     private final int eventCount;
     private final int expectedEventCount;
+    protected final int EVENTKINDCOUNT = 10;
 
-    public PerfTestRxBus(Context context, TestParams params) {
+    public PerfTestRxBusMulti(Context context, TestParams params) {
         super(context, params);
         subscribers = new ArrayList<Object>();
         eventSubscribers = new ArrayList<>();
@@ -61,7 +64,7 @@ public abstract class PerfTestRxBus extends Test {
     @Override
     public void prepareTest() {
         try {
-            Constructor<?> constructor = subscriberClass.getConstructor(PerfTestRxBus.class);
+            Constructor<?> constructor = subscriberClass.getConstructor(PerfTestRxBusMulti.class);
             for (int i = 0; i < params.getSubscriberCount(); i++) {
                 Object subscriber = constructor.newInstance(this);
                 subscribers.add(subscriber);
@@ -80,7 +83,7 @@ public abstract class PerfTestRxBus extends Test {
             case ASYNC:
                 return SubscribeClassRxBusAsync.class;
             case POSTING:
-                return SubscribeClassRxBusDefault.class;
+                return SubscribeClassRxBusDefaultMulti.class;
             default:
                 throw new RuntimeException("Unknown: " + params.getThreadMode());
         }
@@ -98,7 +101,7 @@ public abstract class PerfTestRxBus extends Test {
         }
     }
 
-    public static class Post extends PerfTestRxBus {
+    public static class Post extends PerfTestRxBusMulti {
         public Post(Context context, TestParams params) {
             super(context, params);
         }
@@ -113,7 +116,7 @@ public abstract class PerfTestRxBus extends Test {
             TestEvent event;
             long timeStart = System.nanoTime();
             for (int i = 0; i < super.eventCount; i++) {
-                event = TestEvent.createEvent(i % 1);
+                event = TestEvent.createEvent(i % EVENTKINDCOUNT);
                 RxBus.INSTANCE.post(event);
                 if (canceled) {
                     break;
@@ -135,12 +138,12 @@ public abstract class PerfTestRxBus extends Test {
 
         @Override
         public String getDisplayName() {
-            return "RxBus Post Events, " + params.getThreadMode() + getDisplayModifier(params);
+            return "RxBusMulti Post Events, " + params.getThreadMode() + getDisplayModifier(params);
         }
 
     }
 
-    public static class RegisterAll extends PerfTestRxBus {
+    public static class RegisterAll extends PerfTestRxBusMulti {
         public RegisterAll(Context context, TestParams params) {
             super(context, params);
         }
@@ -154,11 +157,11 @@ public abstract class PerfTestRxBus extends Test {
 
         @Override
         public String getDisplayName() {
-            return "RxBus Register, no unregister" + getDisplayModifier(params);
+            return "RxBusMulti Register, no unregister" + getDisplayModifier(params);
         }
     }
 
-    public static class RegisterOneByOne extends PerfTestRxBus {
+    public static class RegisterOneByOne extends PerfTestRxBusMulti {
         protected Method clearCachesMethod;
 
         public RegisterOneByOne(Context context, TestParams params) {
@@ -198,7 +201,7 @@ public abstract class PerfTestRxBus extends Test {
 
         @Override
         public String getDisplayName() {
-            return "RxBus Register" + getDisplayModifier(params);
+            return "RxBusMulti Register" + getDisplayModifier(params);
         }
     }
 
@@ -217,7 +220,7 @@ public abstract class PerfTestRxBus extends Test {
 
         @Override
         public String getDisplayName() {
-            return "RxBus Register, first time" + getDisplayModifier(params);
+            return "RxBusMulti Register, first time" + getDisplayModifier(params);
         }
 
     }
@@ -312,6 +315,62 @@ public abstract class PerfTestRxBus extends Test {
                     eventsReceivedCount.incrementAndGet();
                 }
             }));
+            eventSubscribers.add(RxBus.INSTANCE.toObserverable(TestEvent1.class, mode).subscribe(new Action1<TestEvent1>() {
+                @Override
+                public void call(TestEvent1 event) {
+                    eventsReceivedCount.incrementAndGet();
+                }
+            }));
+            eventSubscribers.add(RxBus.INSTANCE.toObserverable(TestEvent2.class, mode).subscribe(new Action1<TestEvent2>() {
+                @Override
+                public void call(TestEvent2 event) {
+                    eventsReceivedCount.incrementAndGet();
+                }
+            }));
+            eventSubscribers.add(RxBus.INSTANCE.toObserverable(TestEvent3.class, mode).subscribe(new Action1<TestEvent3>() {
+                @Override
+                public void call(TestEvent3 event) {
+                    eventsReceivedCount.incrementAndGet();
+                }
+            }));
+            eventSubscribers.add(RxBus.INSTANCE.toObserverable(TestEvent4.class, mode).subscribe(new Action1<TestEvent4>() {
+                @Override
+                public void call(TestEvent4 event) {
+                    eventsReceivedCount.incrementAndGet();
+                }
+            }));
+
+            eventSubscribers.add(RxBus.INSTANCE.toObserverable(TestEvent5.class, mode).subscribe(new Action1<TestEvent5>() {
+                @Override
+                public void call(TestEvent5 event) {
+                    eventsReceivedCount.incrementAndGet();
+                }
+            }));
+            eventSubscribers.add(RxBus.INSTANCE.toObserverable(TestEvent6.class, mode).subscribe(new Action1<TestEvent6>() {
+                @Override
+                public void call(TestEvent6 event) {
+                    eventsReceivedCount.incrementAndGet();
+                }
+            }));
+            eventSubscribers.add(RxBus.INSTANCE.toObserverable(TestEvent7.class, mode).subscribe(new Action1<TestEvent7>() {
+                @Override
+                public void call(TestEvent7 event) {
+                    eventsReceivedCount.incrementAndGet();
+                }
+            }));
+            eventSubscribers.add(RxBus.INSTANCE.toObserverable(TestEvent8.class, mode).subscribe(new Action1<TestEvent8>() {
+                @Override
+                public void call(TestEvent8 event) {
+                    eventsReceivedCount.incrementAndGet();
+                }
+            }));
+            eventSubscribers.add(RxBus.INSTANCE.toObserverable(TestEvent9.class, mode).subscribe(new Action1<TestEvent9>() {
+                @Override
+                public void call(TestEvent9 event) {
+                    eventsReceivedCount.incrementAndGet();
+                }
+            }));
+
 
             long timeEnd = System.nanoTime();
             time += timeEnd - timeStart;

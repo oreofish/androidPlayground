@@ -20,16 +20,16 @@ import com.meibug.playground.bus.TestEvent;
 
 import org.greenrobot.eventbus.Subscribe;
 
-public class SubscribeClassRxBusDefault {
-    private PerfTestRxBus perfTestRxBus;
+public class SubscribeClassRxBusDefaultMulti {
+    private PerfTestRxBusMulti perfTestRxBus10;
 
-    public SubscribeClassRxBusDefault(PerfTestRxBus perfTestRxBus) {
-        this.perfTestRxBus = perfTestRxBus;
+    public SubscribeClassRxBusDefaultMulti(PerfTestRxBusMulti perfTestRxBus10) {
+        this.perfTestRxBus10 = perfTestRxBus10;
     }
 
     @Subscribe
     public void onEvent(TestEvent event) {
-        perfTestRxBus.eventsReceivedCount.incrementAndGet();
+        perfTestRxBus10.eventsReceivedCount.incrementAndGet();
     }
 
     public void dummy() {

@@ -103,7 +103,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:inputType="number"
-                    android:text="1000" />
+                    android:text="10000" />
 
                 <TextView
                     android:id="@+id/eventView"
@@ -127,7 +127,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:inputType="number"
-                    android:text="1" />
+                    android:text="10" />
 
                 <TextView
                     android:id="@+id/subscribe"
