@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.meibug.playground.camera.CameraFragment;
 import com.meibug.playground.demo.DemoFragment;
 
 import java.util.ArrayList;
@@ -30,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
         // add fragments
         ArrayList<BaseFragment> fragments = BaseFragment.Companion.getFragments();
         fragments.clear();
+        fragments.add(CameraFragment.newInstance());
         fragments.add(DemoFragment.newInstance());
 
         // init UI
