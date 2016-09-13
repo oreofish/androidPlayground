@@ -100,6 +100,7 @@ dependencies {
     compile "com.trello:rxlifecycle:$rxLifecycleVersion"
     compile "com.trello:rxlifecycle-components:$rxLifecycleVersion"
     compile "com.trello:rxlifecycle-kotlin:$rxLifecycleVersion"
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 }
 
 repositories {

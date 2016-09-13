@@ -12,6 +12,7 @@ public interface CameraContract {
     }
 
     interface Presenter extends BasePresenter {
-        void sayHi();
+        void fileCamera();
+        void contentCamera();
     }
 }
